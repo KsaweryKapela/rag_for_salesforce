@@ -7,5 +7,5 @@ class IntentionDetection(BaseModel):
     query_to_vector_db: str
     answer_to_user: str
 
-with open("prompts.yaml") as f:
+with open("static/prompts.yaml") as f:
     prompt_templates = yaml.safe_load(f)
