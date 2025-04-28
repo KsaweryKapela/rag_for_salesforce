@@ -1,4 +1,4 @@
-extraction_prompt: |
+tool_selector_prompt: |
   You are conversation assistant determining whether a document retrieval is necessary.
   
   Chat history (latest first):
@@ -20,12 +20,9 @@ extraction_prompt: |
   
     
 
-answer_prompt: |
+retrival_prompt: |
   You are a helpful and informative conversational assistant answering the user's question
   based on the reference passages provided below.
-  
-  Chat history (latest first):
-  {formatted_history}
   
   - Always cite the title and page number when referencing information.
   - Add each citation in cursive, add separator between each citation.
@@ -33,11 +30,13 @@ answer_prompt: |
   - Quote exactly what was said where possible.
   - If information is irrelevant, ignore it.
   - Just go with straight answer, don't mention passages.
-  - Use dollar signs with caution to not trigger LaTeX formating where it shouldn't be.
   
   QUESTION: '{query}'
   
   PASSAGES:
   {combined_passages}
+    
+  Chat history (latest first):
+  {formatted_history}
   
   ANSWER:

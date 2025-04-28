@@ -4,13 +4,15 @@ from llm.llm_logic import DocChatEngine
 class DocRetrieverChatApp:
     def __init__(self):
         self._setup_page()
-        self._ensure_session_messages()
-        self.chat_engine = DocChatEngine()
+        self._ensure_session_objects()
+        self.chat_engine = st.session_state.chat_engine
 
     @staticmethod
-    def _ensure_session_messages():
+    def _ensure_session_objects():
         if "messages" not in st.session_state:
             st.session_state.messages = []
+        if "chat_engine" not in st.session_state:
+            st.session_state.chat_engine = DocChatEngine()
 
     @staticmethod
     def _setup_page():
@@ -44,6 +46,7 @@ class DocRetrieverChatApp:
                 placeholder = st.empty()
                 with st.spinner("Thinking…"):
                     raw_reply = self.chat_engine.process_user_query(user_query)
+                # print(raw_reply)
                 placeholder.markdown(self._escape_dollars(raw_reply))
 
             st.session_state.messages.append({"role": "assistant", "content": raw_reply})
