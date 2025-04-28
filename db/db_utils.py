@@ -50,7 +50,7 @@ class ChromaDB:
             print(f"Chroma DB '{self.collection_name}' found. Loading existing database...")
             return self._open_existing_collection()
 
-    def get_relevant_passages(self, query: str, top_n: int = 3) -> str:
+    def get_relevant_passages(self, query: str, top_n: int = 20) -> str:
         query_embedding = google_ef([query])
         results = self.db.query(
             query_embeddings=query_embedding,
